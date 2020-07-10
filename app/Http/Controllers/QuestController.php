@@ -16,7 +16,7 @@ class QuestController extends Controller
     {
         $data = Quest::all();
         
-        return view('quest.index1', compact('data'));
+        return view('quest.indexa', compact('data'));
     }
 
     /**
@@ -50,7 +50,7 @@ class QuestController extends Controller
     {
         $data = Quest::find($id);
         // dd($data);
-        return view('quest.show1', compact('data'));
+        return view('quest.showa', compact('data'));
     }
 
     /**

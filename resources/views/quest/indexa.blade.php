@@ -7,7 +7,7 @@
           <div class="card shadow mb-4">
             <div class="card-body">
             <a href="#">
-                <button type="submit" class="btn btn-primary">Tambah Category</button>
+                <button type="submit" class="btn btn-primary"></button>
             </a><br>&nbsp;
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
