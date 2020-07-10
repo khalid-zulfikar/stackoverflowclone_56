@@ -20,3 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/master', function () {
+    return view('datta-able.master');
+});
+
+Route::get('/quest', function () {
+    return view('quest.index');
+});
