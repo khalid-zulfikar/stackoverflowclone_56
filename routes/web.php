@@ -33,3 +33,7 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 });
 
 Route::resource('pertanyaan', 'QuestController');
+
+Route::get('/resetnew', function () {
+    return view('auth.passwords.emailnew');
+});
