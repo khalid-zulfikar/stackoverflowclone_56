@@ -11,7 +11,7 @@
 
   <title>
   @section('title')
-      | Rivaldo
+      | {{ config('app.name', 'Laravel') }}
   @show    
   </title>
 

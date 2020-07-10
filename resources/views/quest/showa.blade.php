@@ -8,6 +8,19 @@
 
 @push('link')
 <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!--
+Author : Maniruzzaman Akash
+Email  : manirujjamanakash@gmail.com
+-->
+
+<!--To Work with icons-->
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
 @endpush
 
 @section('content')
@@ -15,24 +28,47 @@
 <div class="card">
       
     <div class="card-header">
-        <h3 class="card-title">{{$data->title}}</h3>    
+        <h3 class="card-title">{{$comment->first()->title}}</h3>    
         <br>
     </div>
       <!-- /.card-header -->
     <div class="card-body" style="font-size : 17px">      
-        {!!$data->content!!} 
+        {!!$comment->first()->content!!} 
         <br>&nbsp;   
     </div>
       <!-- /.card-body -->
 </div>
-<div class="card mt-2">
-    <div class="card-body">
-        <!-- Show comment here -->
+<!-- Comment start -->
+@foreach($comment->flatMap->comments as $komen )
+<div class="container mt-2">	
+	<div class="card">
+	  <div class="card-body">
+      <div class="row">
+        	   
+        <div class="col-md-12">
+          <p>
+            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>
+              nama</strong></a>
+              
+      	    <div class="clearfix"></div>
+            <p>{!! $komen->content_comment !!}</p>
+      	    <p>
+              <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+              <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+    	      </p>
+        </div>
+	    </div>
+          <!-- Nested Comment start -->
+	    
+          <!-- Nested Comment end -->
     </div>
-</div>  
+	</div>
+</div>
+@endforeach
+<!-- Comment end -->
 <div class="card mt-2">
     <div class="card-body">
-        <form action="/comment/{{$data->id}}" method="post">
+        <form action="/comment/{{$comment->first()->id}}" method="post">
         @csrf
           <div class="form-group">
             <textarea name="content" class="form-control my-editor">{!! old('content', $content ?? '') !!}</textarea>

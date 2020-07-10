@@ -15,7 +15,7 @@ class CreateCommentQuestionsTable extends Migration
     {
         Schema::create('comment_questions', function (Blueprint $table) {
             $table->id();
-            $table->longtext('content')->nullable();
+            $table->longtext('content_comment')->nullable();
             $table->unsignedBigInteger('user_id')->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('quest_id')->foreign('quest_id')->references('id')->on('quests');
             $table->timestamps();

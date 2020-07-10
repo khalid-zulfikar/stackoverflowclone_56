@@ -28,8 +28,13 @@ Route::get('/master', function () {
 Route::get('/quest', function () {
     return view('quest.index');
 });
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('pertanyaan', 'QuestController');
+    Route::post('/comment/{id}','CommentQuestionController@store');
+});
+
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
-
-Route::resource('pertanyaan', 'QuestController');

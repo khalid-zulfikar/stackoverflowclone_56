@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\CommentQuestion;
+use App\CommentQuestion as Coment;
 use Illuminate\Http\Request;
+use Auth;
 
 class CommentQuestionController extends Controller
 {
@@ -33,9 +34,15 @@ class CommentQuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $data=$request->all();
+        $new_comment = Coment::create([
+            'user_id' =>Auth::user()->id,
+            'quest_id' => $id,
+            'content_comment' => $data["content"]
+        ]);
+        return redirect('/pertanyaan/'.$id);
     }
 
     /**

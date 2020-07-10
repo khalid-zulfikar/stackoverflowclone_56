@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Quest;
+use App\CommentQuestion as Comment;
+use App\User;
+
 use Illuminate\Http\Request;
 
 class QuestController extends Controller
@@ -15,7 +18,6 @@ class QuestController extends Controller
     public function index()
     {
         $data = Quest::all();
-        
         return view('quest.indexa', compact('data'));
     }
 
@@ -48,9 +50,10 @@ class QuestController extends Controller
      */
     public function show($id)
     {
-        $data = Quest::find($id);
-        // dd($data);
-        return view('quest.showa', compact('data'));
+        $comment = Quest::find($id)->with('comments')->get();
+        $data= User::usercomment()->get();
+        dd($data);
+        return view('quest.showa', compact('data','comment'));
     }
 
     /**
