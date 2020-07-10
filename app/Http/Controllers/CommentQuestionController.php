@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Quest;
+use App\CommentQuestion;
 use Illuminate\Http\Request;
 
-class QuestController extends Controller
+class CommentQuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class QuestController extends Controller
      */
     public function index()
     {
-        $data = Quest::all();
-        
-        return view('quest.indexa', compact('data'));
+        //
     }
 
     /**
@@ -43,23 +41,21 @@ class QuestController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Quest  $quest
+     * @param  \App\CommentQuestion  $commentQuestion
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(CommentQuestion $commentQuestion)
     {
-        $data = Quest::find($id);
-        // dd($data);
-        return view('quest.showa', compact('data'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Quest  $quest
+     * @param  \App\CommentQuestion  $commentQuestion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Quest $quest)
+    public function edit(CommentQuestion $commentQuestion)
     {
         //
     }
@@ -68,10 +64,10 @@ class QuestController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Quest  $quest
+     * @param  \App\CommentQuestion  $commentQuestion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Quest $quest)
+    public function update(Request $request, CommentQuestion $commentQuestion)
     {
         //
     }
@@ -79,10 +75,10 @@ class QuestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Quest  $quest
+     * @param  \App\CommentQuestion  $commentQuestion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Quest $quest)
+    public function destroy(CommentQuestion $commentQuestion)
     {
         //
     }

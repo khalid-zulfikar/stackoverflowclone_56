@@ -27,7 +27,18 @@
 </div>
 <div class="card mt-2">
     <div class="card-body">
-        <textarea name="content" class="form-control my-editor">{!! old('content', $content ?? '') !!}</textarea>
+        <!-- Show comment here -->
+    </div>
+</div>  
+<div class="card mt-2">
+    <div class="card-body">
+        <form action="/comment/{{$data->id}}" method="post">
+        @csrf
+          <div class="form-group">
+            <textarea name="content" class="form-control my-editor">{!! old('content', $content ?? '') !!}</textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
 </div>   
 @endsection
