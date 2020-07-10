@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Quest extends Model
+class CommentQuestion extends Model
 {
     //
     protected $guarded = [];
