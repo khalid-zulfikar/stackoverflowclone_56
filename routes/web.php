@@ -28,3 +28,6 @@ Route::get('/master', function () {
 Route::get('/quest', function () {
     return view('quest.index');
 });
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
