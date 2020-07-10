@@ -51,8 +51,8 @@ class QuestController extends Controller
     public function show($id)
     {
         $comment = Quest::find($id)->with('comments')->get();
-        $data= User::usercomment()->get();
-        dd($data);
+        $data= Quest::find($id);
+        // dd($data);
         return view('quest.showa', compact('data','comment'));
     }
 
