@@ -32,6 +32,6 @@ class CreateProfilesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('profiles');
-        $table->dropForeign(['user_id']);
+       
     }
 }

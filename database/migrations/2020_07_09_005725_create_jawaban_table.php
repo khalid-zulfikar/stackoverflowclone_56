@@ -32,6 +32,6 @@ class CreateJawabanTable extends Migration
     public function down()
     {
         Schema::dropIfExists('jawaban');
-        $table->dropForeign(['penjawab_id']);
+       
     }
 }

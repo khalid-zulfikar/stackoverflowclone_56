@@ -31,6 +31,6 @@ class CreatePertanyaanTable extends Migration
     public function down()
     {
         Schema::dropIfExists('pertanyaan');
-        $table->dropForeign(['penanya_id']);
+       
     }
 }

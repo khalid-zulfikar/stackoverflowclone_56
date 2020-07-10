@@ -32,7 +32,6 @@ class CreateKomentarJawabanTable extends Migration
     public function down()
     {
         Schema::dropIfExists('komentar_jawaban');
-        $table->dropForeign(['pengomentar_id']);
-        $table->dropForeign(['jawaban_id']);
+     
     }
 }

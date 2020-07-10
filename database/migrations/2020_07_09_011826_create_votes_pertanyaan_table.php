@@ -32,7 +32,6 @@ class CreateVotesPertanyaanTable extends Migration
     public function down()
     {
         Schema::dropIfExists('votes_pertanyaan');
-        $table->dropForeign(['user_id']);
-        $table->dropForeign(['pertanyaan_id']);
+       
     }
 }
