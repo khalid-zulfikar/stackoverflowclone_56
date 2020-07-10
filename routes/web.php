@@ -25,9 +25,14 @@ Route::get('/master', function () {
     return view('datta-able.master');
 });
 
-Route::get('/quest', function () {
-    return view('quest.index');
-});
+Route::get('/quest', 'QuestController@index'); //menampilkan semua data
+Route::get('/quest/create', 'QuestController@create'); //menampilkan halaman form
+Route::post('/quest', 'QuestController@pertanyaan'); // menyimpan data
+Route::get('/quest/{id}', 'QuestController@show'); //menampilkan detail pertanyaan per-id
+Route::get('/quest/{id}/edit', 'QuestController@edit'); //menampilkan form untuk edit data
+Route::put('/quest/{id}', 'QuestController@update'); //mengupdate data 
+Route::delete('/quest/{id}', 'QuestController@destroy'); //mengupdate data 
+
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
