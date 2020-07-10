@@ -31,10 +31,14 @@ Route::get('/quest', function () {
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('pertanyaan', 'QuestController');
+    Route::resource('quest', 'QuestController');
     Route::post('/comment/{id}','CommentQuestionController@store');
 });
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
+Route::get('/resetnew', function () {
+    return view('auth.passwords.emailnew');
 });

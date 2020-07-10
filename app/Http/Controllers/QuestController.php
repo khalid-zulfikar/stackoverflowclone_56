@@ -17,8 +17,10 @@ class QuestController extends Controller
      */
     public function index()
     {
-        $data = Quest::all();
-        return view('quest.indexa', compact('data'));
+
+        // return view('quest.indexa', compact('data'));
+        $quests = Quest::all();
+        return view('quest.index', compact('quests'));
     }
 
     /**
@@ -29,6 +31,7 @@ class QuestController extends Controller
     public function create()
     {
         //
+        return view('quest.form');
     }
 
     /**
@@ -40,6 +43,13 @@ class QuestController extends Controller
     public function store(Request $request)
     {
         //
+        $quest = new Quest;
+        $quest->title = $request->title;    
+        $quest->content = $request->content; 
+        $quest->user_id = $request->user_id;  
+        $quest->save(); 
+
+        return redirect('/quest')->with('success','Create data berhasil!');
     }
 
     /**
@@ -53,7 +63,10 @@ class QuestController extends Controller
         $comment = Quest::find($id)->with('comments')->get();
         $data= Quest::find($id);
         // dd($data);
-        return view('quest.showa', compact('data','comment'));
+        // return view('quest.showa', compact('data','comment'));
+        $quest = Quest::find($id);
+
+        return view('quest.show', compact('quest'));
     }
 
     /**
@@ -62,9 +75,12 @@ class QuestController extends Controller
      * @param  \App\Quest  $quest
      * @return \Illuminate\Http\Response
      */
-    public function edit(Quest $quest)
+    public function edit(Quest $quest, $id)
     {
         //
+        $quest = Quest::find($id);
+
+        return view('quest.edit', compact('quest'));
     }
 
     /**
@@ -74,9 +90,16 @@ class QuestController extends Controller
      * @param  \App\Quest  $quest
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Quest $quest)
+    public function update(Request $request, Quest $quest, $id)
     {
         //
+        $quest = Quest::find($id);
+        $quest->title = $request->title;    
+        $quest->content = $request->content; 
+        $quest->user_id = $request->user_id;          
+        $quest->save();
+
+        return redirect('/quest')->with('success','Update data berhasil!');
     }
 
     /**
@@ -85,8 +108,11 @@ class QuestController extends Controller
      * @param  \App\Quest  $quest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Quest $quest)
+    public function destroy(Quest $quest, $id)
     {
         //
+        $quest = Quest::find($id);
+        $quest->delete();
+        return redirect('/quest')->with('success','Delete data berhasil!');
     }
 }
