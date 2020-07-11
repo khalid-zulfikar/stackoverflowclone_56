@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Quest;
 use App\CommentQuestion as Comment;
 use App\User;
+use Auth;
+
 
 use Illuminate\Http\Request;
 
@@ -45,7 +47,7 @@ class QuestController extends Controller
         $quest = new Quest;
         $quest->title = $request->title;    
         $quest->content = $request->content; 
-        $quest->user_id = $request->user_id;  
+        $quest->user_id = Auth::user()->id;  
         $quest->save(); 
 
         return redirect('/quest')->with('success','Create data berhasil!');
@@ -85,7 +87,7 @@ class QuestController extends Controller
      * @param  \App\Quest  $quest
      * @return \Illuminate\Http\Response
      */
-    public function edit(Quest $quest, $id)
+    public function edit($id)
     {
         //
         $quest = Quest::find($id);
@@ -100,13 +102,13 @@ class QuestController extends Controller
      * @param  \App\Quest  $quest
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Quest $quest, $id)
+    public function update(Request $request, $id)
     {
         //
         $quest = Quest::find($id);
         $quest->title = $request->title;    
         $quest->content = $request->content; 
-        $quest->user_id = $request->user_id;          
+        $quest->user_id = Auth::user()->id;          
         $quest->save();
 
         return redirect('/quest')->with('success','Update data berhasil!');
@@ -118,7 +120,7 @@ class QuestController extends Controller
      * @param  \App\Quest  $quest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Quest $quest, $id)
+    public function destroy($id)
     {
         //
         $quest = Quest::find($id);

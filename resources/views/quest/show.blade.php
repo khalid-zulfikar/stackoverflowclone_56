@@ -47,13 +47,16 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                            {{$quest->title}}<br>
-                            <h3 class="card-title">{{$quest->content}}</h3>
+                            
+                            <h3 class="card-title">{{$quest->title}}</h3>
                             <br>
                             Author : {{$user->name}}
                             | Create : {{$quest->created_at}}
+                            <hr>
+                            {{$quest->content}}
                             
                             </div>
+                           
                             <!-- /.card-header -->
                             <!-- Comment start -->
                             @foreach($quest->comments as $komen )

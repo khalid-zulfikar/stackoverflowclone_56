@@ -38,7 +38,7 @@
                         <!-- [ Main Content ] start -->
                         <div class="row">
                             <div class="col-sm-12">
-                                <a href="/pertanyaan/create" class="btn btn-primary">Buat Pertanyaan</a>
+                                <a href="/quest/create" class="btn btn-primary">Buat Pertanyaan</a>
                                 @if (session()->get('success'))
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                                         <strong> {{session()->get('success')}} </strong>
