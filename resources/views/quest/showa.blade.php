@@ -21,18 +21,18 @@
 <div class="card">
       
     <div class="card-header">
-        <h3 class="card-title">{{$comment->first()->title}}</h3>    
+        <h3 class="card-title">{{$quest->title}}</h3>    
         <br>
     </div>
       <!-- /.card-header -->
     <div class="card-body" style="font-size : 17px">      
-        {!!$comment->first()->content!!} 
+        {!!$quest->content!!} 
         <br>&nbsp;   
     </div>
       <!-- /.card-body -->
 </div>
 <!-- Comment start -->
-@foreach($comment->flatMap->comments as $komen )
+@foreach($quest->comments as $komen )
 <div class="container mt-2">	
 	<div class="card">
 	  <div class="card-body">
@@ -61,7 +61,7 @@
 <!-- Comment end -->
 <div class="card mt-2">
     <div class="card-body">
-        <form action="/comment/{{$comment->first()->id}}" method="post">
+        <form action="/comment/{{$quest->id}}" method="post">
         @csrf
           <div class="form-group">
             <textarea name="content" class="form-control my-editor">{!! old('content', $content ?? '') !!}</textarea>

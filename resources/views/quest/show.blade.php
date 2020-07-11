@@ -57,22 +57,21 @@
                             <!-- /.card-header -->
                             <!-- Comment start -->
                             @foreach($quest->comments as $komen )
-                            <div class="container ">	
-                                <div class="card mt-2" style="height: auto" >
+                            <div class="row justify-content-md-center ">	
+                                <div class="card col-md-11 mt-2" style="height: auto;" >
                                     <div class="card-body">
                                         <div class="row">
                                                 
                                             <div class="col-md-12">
                                             <p>
                                                 <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>
-                                                nama</strong></a>
+                                                {!! $komen->user_name !!}</strong></a>
                                                 
                                                 <div class="clearfix"></div>
                                                 <p>{!! $komen->content_comment !!}</p>
-                                                <p>
+                                                <hr>
                                                 <a class="float-right btn btn-outline-primary "> <i class="fa fa-reply"></i> Reply</a>
                                                 <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-                                                </p>
                                             </div>
                                         </div>
                                             <!-- Nested Comment start -->
