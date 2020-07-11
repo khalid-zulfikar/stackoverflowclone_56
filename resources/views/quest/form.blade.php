@@ -55,10 +55,7 @@
                                 <label for="pertanyaan">Pertanyaan</label>
                                 <input type="text" class="form-control" id="pertanyaan" name="content" placeholder="Isi Pertanyaan">
                                 </div>
-                                <div class="form-group">
-                                <label for="pertanyaan">Nama</label>
-                                <input type="number" class="form-control" id="pertanyaan" name="user_id" placeholder="Isi Pertanyaan">
-                                </div>
+                                
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
