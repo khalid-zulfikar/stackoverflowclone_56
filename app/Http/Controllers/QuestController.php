@@ -68,7 +68,6 @@ class QuestController extends Controller
         $quest = Quest::find($id);
         foreach($quest->comments as $value){    
             for ($i=0; $i < count($data); $i++) { 
-                echo $data[0]["user_id"];
                 if($value->user_id == $data[$i]["user_id"]){
                     $value->user_name = $data[$i]["user_name"];
                 }
