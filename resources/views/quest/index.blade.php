@@ -26,7 +26,7 @@
                                 </div>
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="javascript:">index</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:">Quest</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                                 <tr>
                                                     <th style="width: 10px">#</th>
                                                     <th>Judul</th>
-                                                    <th>Pertanyaan</th>
+                                                  
                                                     <th style="width: 350px;">Proses</th>
                                                 </tr>
                                             </thead>
@@ -64,16 +64,15 @@
                                                 <tr>
                                                 <td> {{$key+1}} </td>
                                                 <td> {{$q->title}} </td>
-                                                <td> {{$q->content}} </td>
+                                               
                                                 <td>
-                                                    <a href="/quest/{{$q->id}}/show" class="btn btn-app"><i class="fas fa-window-maximize"></i> Show</a>
-                                                    <a href="/quest/{{$q->id}}/edit" class="btn btn-app"><i class="fas fa-edit"></i> Edit</a>
-                                                    <form action="/quest/{{$q->id}}" method="post" style="display: inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-app"><i class="fas fa-trash"></i> Delete </button>
-                                                    </form>
-                                                    
+                                                    <a href="/quest/{{$q->id}}"><button class="btn btn-sm btn-success"><i class="fas fa-search"></i></button></a>
+                                                    <a href="/quest/{{$q->id}}/edit"><button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button></a>
+                                                    <form action="/quest/{{$q->id}}" method="POST" style="display: inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                                    </form>  
                                                 </td>    
                                                 </tr>
                                                 
@@ -83,7 +82,6 @@
                                                 <tr>
                                                     <th style="width: 10px">#</th>
                                                     <th>Judul</th>
-                                                    <th>Pertanyaan</th>
                                                     <th style="width: 350px;">Proses</th>
                                                 </tr>
                                             </tfoot>

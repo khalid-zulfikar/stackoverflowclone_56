@@ -17,7 +17,6 @@ class QuestController extends Controller
      */
     public function index()
     {
-
         // return view('quest.indexa', compact('data'));
         $quests = Quest::all();
         return view('quest.index', compact('quests'));
@@ -60,13 +59,13 @@ class QuestController extends Controller
      */
     public function show($id)
     {
-        $comment = Quest::find($id)->with('comments')->get();
-        $data= Quest::find($id);
+        
         // dd($data);
         // return view('quest.showa', compact('data','comment'));
         $quest = Quest::find($id);
+        $user = User::find($quest->user_id);
 
-        return view('quest.show', compact('quest'));
+        return view('quest.show', compact('quest','user'));
     }
 
     /**
