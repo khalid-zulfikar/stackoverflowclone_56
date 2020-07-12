@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('quest', 'QuestController');
     Route::post('/comment/{id}','CommentQuestionController@store');
     Route::Delete('/comment/{id}','CommentQuestionController@destroy');
-
+    Route::put('comments/edit','CommentQuestionController@updateComment');
     Route::post('/comment/store', 'CommentQuestionController@store')->name('comment.add');
     Route::post('/reply/store', 'CommentQuestionController@replyStore')->name('reply.add');
 

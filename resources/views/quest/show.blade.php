@@ -100,9 +100,25 @@
 
 @push('scripts')
 <script>
-$(document).on("click", ".open-AddBookDialog", function () {
-     var myBookId = $(this).data('id');
-     $(".modal-body #bookId").val( myBookId );
+$(document).on("click", ".open-AddCommentDialog", function () {
+     var myCommentId = $(this).data('id');
+     $(".modal-body #commentId").val( myCommentId );
+     
+});
+</script>
+<script>
+$(document).on("click", ".open-EditCommentDialog", function () {
+     var myCommentId = $(this).data('id');
+     var myCommentContent = $(this).data('comment');
+     var myParentId = $(this).data('parent_id');
+
+
+     $(".modal-body #commentId").val( myCommentId );
+     $(".modal-comment #commentContent").val( myCommentContent );
+     $(".modal-parent #parent_id").val( myParentId );
+
+     tinyMCE.get('commentContent').setContent(myCommentContent);
+
      
 });
 </script>

@@ -69,7 +69,7 @@ class CommentQuestionController extends Controller
      * @param  \App\CommentQuestion  $commentQuestion
      * @return \Illuminate\Http\Response
      */
-    public function show(CommentQuestion $commentQuestion)
+    public function show(Request $request)
     {
         //
     }
@@ -92,9 +92,14 @@ class CommentQuestionController extends Controller
      * @param  \App\CommentQuestion  $commentQuestion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CommentQuestion $commentQuestion)
+    public function updateComment(Request $request)
     {
         //
+        Comment::where('id', $request->get('comment_id'))
+          ->update(['content_comment' => $request->get('content')]);
+
+        return back()->with('success','Update data berhasil!');
+
     }
 
     /**
@@ -106,11 +111,12 @@ class CommentQuestionController extends Controller
     public function destroy($id)
     {
         $comment = Comment::find($id);
-        $comment_parent = Comment::where('parent_id',$id)->delete();
-        
+        $comment_parent = Comment::where('parent_id',$id)->get();
+        if($comment_parent){
+            $comment_parent = Comment::where('parent_id',$id)->delete();
+        }
         // dd($comment_parent);
         $comment->delete();
-
         return back();
     }
 }
