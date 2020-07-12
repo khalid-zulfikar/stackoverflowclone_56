@@ -6,6 +6,7 @@ use App\Quest;
 use App\CommentQuestion as Comment;
 use App\User;
 use Auth;
+use App\Commentquestion_Like as Like;
 
 
 use Illuminate\Http\Request;
@@ -64,7 +65,6 @@ class QuestController extends Controller
         
         
         $quest = Quest::find($id);
-       
         
         return view('quest.show', compact('quest'));
     }

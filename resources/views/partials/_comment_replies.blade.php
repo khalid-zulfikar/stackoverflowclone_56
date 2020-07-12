@@ -7,9 +7,17 @@
             <a href="" id="reply"></a>
             <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group" role="group" aria-label="First group">
+                @if(Auth::user())
+
                     <a data-toggle="modal" data-id="{{ $comment->id }}" title="Add this item"  class="open-AddCommentDialog float-right btn btn-outline-primary ml-2" href="#addCommentDialog" style="display : inline"> <i class="fa fa-reply"></i> Balas</a>
-        	        <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Suka</a>
+        	    @endif
+                    <form action="{{ route('like.comment') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="comment_id" value="{{ $comment->id }}" />
+                      
+                    </form>
                 </div>
+                @if(Auth::user()&& $comment->user_id == Auth::user()->id)
                 <div class="input-group">
                     <div class="pull-right"> 
                         <div class="btn-group"> 
@@ -24,13 +32,14 @@
                                     <form action="/comment/{{$comment->id}}" method="POST" style="display: inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm ">Hapus</button>
+                                        <button type="submit" class="btn btn-outline-danger ">Hapus</button>
                                     </form>
                                 </li> 
                             </ul> 
                         </div> 
                     </div>
                 </div>
+                @endif
             </div>
             @include('partials._modal')           
             @include('partials._comment_replies', ['comments' => $comment->replies])         

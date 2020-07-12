@@ -28,15 +28,11 @@
                     <span class="pcoded-mtext">Profile</span>
                 </a>
             </li>
-            <li class="nav-item pcoded-hasmenu">
-                <a href="javascript:" class="nav-link ">
-                    <span class="pcoded-micon"><i class="feather icon-layout"></i></span>
-                    <span class="pcoded-mtext">Quest</span>
+            <li data-username="Disabled Menu" class="nav-item">
+                <a href="/quest" class="nav-link"><span class="pcoded-micon">
+                    <i class="feather icon-layout"></i></span>
+                    <span class="pcoded-mtext">Pertanyaan</span>
                 </a>
-                <ul class="pcoded-submenu">
-                    <li class=""><a href="#" class="">My-Quest</a></li>
-                    <li class=""><a href="#" class="">Forum</a></li>
-                </ul>
             </li>
             <li class="nav-item">
                 <a href="index.html" class="nav-link ">
@@ -44,12 +40,28 @@
                     <span class="pcoded-mtext">My-Answer</span>
                 </a>
             </li>
-            <li data-username="Disabled Menu" class="nav-item disabled">
-                <a href="javascript:" class="nav-link"><span class="pcoded-micon">
-                    <i class="feather icon-power"></i></span>
-                    <span class="pcoded-mtext">Disabled menu</span>
-                </a>
+            @if(Auth::user())
+
+            <li data-username="Disabled Menu" class="nav-item">
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+                                        @csrf
+                <button type="submit" class="btn btn-none"><span class="pcoded-micon">
+                <i class="feather icon-power"></i></span>
+                <span class="pcoded-mtext">Logout</span>
+                </button>
+            </form>
             </li>
+            @else
+            <li data-username="Disabled Menu" class="nav-item">
+                <a href="{{ route('login') }}">
+                <button type="submit" class="btn btn-none"><span class="pcoded-micon">
+                <i class="feather icon-power"></i></span>
+                <span class="pcoded-mtext">Login</span>
+                </button>
+                </a>
+            
+            </li>
+            @endif
         </ul>
     </div>
     </div>

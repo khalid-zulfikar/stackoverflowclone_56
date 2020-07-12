@@ -37,7 +37,7 @@
       <div class="modal-header">
           <h3>Edit Komentar</h3>
           <button class="close" data-dismiss="modal">×</button>
-        </div>
+      </div>
             <form method="Post" action="{{url('/comments/edit')}}">
                 @csrf
                 @method('PUT')
@@ -47,13 +47,17 @@
                     </div>  
                       <input type="hidden" name="quest_id" value="{{ $quest_id }}" />
                     <div class="modal-body">
-                      <input type="" name="comment_id" id="commentId" />
-                  </div>
-                  <div class="modal-parent">
-                      <input type="" name="parent_id" id="parent_id"/>
-                  </div>
+                      <input type="hidden" name="comment_id" id="commentId" />
+                    </div>
+                    <div class="modal-parent">
+                      <input type="hidden" name="parent_id" id="parent_id"/>
+                    </div>
                 </div>
                 <div class="form-group">
+                    <input type="submit" class="btn btn-warning" value="Reply" />
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <input type="submit" class="btn btn-warning" value="Reply" />
                 </div>
             </form>

@@ -97,9 +97,7 @@ class CommentQuestionController extends Controller
         //
         Comment::where('id', $request->get('comment_id'))
           ->update(['content_comment' => $request->get('content')]);
-
         return back()->with('success','Update data berhasil!');
-
     }
 
     /**

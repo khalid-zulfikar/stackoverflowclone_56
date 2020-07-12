@@ -38,7 +38,9 @@
                         <!-- [ Main Content ] start -->
                         <div class="row">
                             <div class="col-sm-12">
+                                @if(Auth::user())
                                 <a href="/quest/create" class="btn btn-primary">Buat Pertanyaan</a>
+                                @endif
                                 @if (session()->get('success'))
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                                         <strong> {{session()->get('success')}} </strong>
@@ -53,7 +55,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 10px">#</th>
-                                                    <th>Judul</th>
+                                                    <th>Judul </th>
                                                   
                                                     <th style="width: 350px;">Proses</th>
                                                 </tr>
@@ -67,12 +69,14 @@
                                                
                                                 <td>
                                                     <a href="/quest/{{$q->id}}"><button class="btn btn-sm btn-success"><i class="fas fa-search"></i></button></a>
+                                                    @if(Auth::user() && $q->user_id == Auth::user()->id )
                                                     <a href="/quest/{{$q->id}}/edit"><button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button></a>
                                                     <form action="/quest/{{$q->id}}" method="POST" style="display: inline">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                                    </form>  
+                                                    </form> 
+                                                    @endif 
                                                 </td>    
                                                 </tr>
                                                 

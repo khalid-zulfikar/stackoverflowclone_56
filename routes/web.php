@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'QuestController@index')->name('home');
+
 
 Auth::routes();
 
@@ -25,20 +24,20 @@ Route::get('/master', function () {
     return view('datta-able.master');
 });
 
-Route::get('/quest', function () {
-    return view('quest.index');
-});
 
 
+Route::resource('quest', 'QuestController');
 Route::middleware(['auth'])->group(function () {
-    Route::resource('quest', 'QuestController');
     Route::post('/comment/{id}','CommentQuestionController@store');
     Route::Delete('/comment/{id}','CommentQuestionController@destroy');
     Route::put('comments/edit','CommentQuestionController@updateComment');
     Route::post('/comment/store', 'CommentQuestionController@store')->name('comment.add');
     Route::post('/reply/store', 'CommentQuestionController@replyStore')->name('reply.add');
-
+    Route::post('/like/comment', 'CommentquestionLikeController@store')->name('like.comment');;
+    
 });
+Route::get('/quest','QuestController@index');
+Route::get('/quest/{id}','QuestController@show');
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();

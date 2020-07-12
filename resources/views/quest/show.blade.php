@@ -57,11 +57,9 @@
                             Author : {{$quest->user->name }}
                             | Create : {{$quest->created_at}}
                             <hr>
-                            {{$quest->content}}
-                            
+                            {!!$quest->content!!}
                             </div>
-                        </div>
-                           
+                        </div>           
                             <!-- /.card-header -->
                             <!-- Comment start -->
                         <div class="row justify-content-md-center ">
@@ -72,19 +70,21 @@
 
                             
                             <!-- Comment end -->
+                            @if(Auth::user())
                         <div class="card ">
                             <div class="card-body">
                                 <form action="{{ route('comment.add') }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <textarea name="content" class="form-control my-editor">{!! old('content', $content ?? '') !!}</textarea>
-                            <input type="hidden" name="quest_id" value="{{ $quest->id }}" />
+                                    <input type="hidden" name="quest_id" value="{{ $quest->id }}" />
 
                                 </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
                         </div> 
+                        @endif
                         
                         <!-- /.card -->
                         <!-- [ Main Content ] end -->
@@ -111,15 +111,10 @@ $(document).on("click", ".open-EditCommentDialog", function () {
      var myCommentId = $(this).data('id');
      var myCommentContent = $(this).data('comment');
      var myParentId = $(this).data('parent_id');
-
-
      $(".modal-body #commentId").val( myCommentId );
      $(".modal-comment #commentContent").val( myCommentContent );
      $(".modal-parent #parent_id").val( myParentId );
-
-     tinyMCE.get('commentContent').setContent(myCommentContent);
-
-     
+     tinyMCE.get('commentContent').setContent(myCommentContent);     
 });
 </script>
 <script>

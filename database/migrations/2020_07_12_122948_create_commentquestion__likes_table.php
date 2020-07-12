@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommentQuestionsTable extends Migration
+class CreateCommentquestionLikesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateCommentQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comment_questions', function (Blueprint $table) {
+        Schema::create('commentquestion__likes', function (Blueprint $table) {
             $table->id();
-            $table->longtext('content_comment')->nullable();
+            $table->integer('value')->nullable();
             $table->unsignedBigInteger('user_id')->foreign('user_id')->references('id')->on('users');
-            $table->integer('parent_id')->unsigned()->nullable();
-            $table->integer('commentable_id')->unsigned();
-            $table->string('commentable_type');
+            $table->unsignedBigInteger('comment_id')->foreign('comment_id')->references('id')->on('comment_questions');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateCommentQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comment_questions');
+        Schema::dropIfExists('commentquestion__likes');
     }
 }
