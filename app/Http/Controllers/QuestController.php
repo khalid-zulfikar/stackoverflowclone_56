@@ -62,23 +62,11 @@ class QuestController extends Controller
     public function show($id)
     {
         
-        $user = User::all();
-        $data=[];
-        foreach($user as $user){
-            $data[] = array("user_id"=>$user->id,"user_name"=> $user->name);
-        }  
+        
         $quest = Quest::find($id);
-        foreach($quest->comments as $value){    
-            for ($i=0; $i < count($data); $i++) { 
-                if($value->user_id == $data[$i]["user_id"]){
-                    $value->user_name = $data[$i]["user_name"];
-                }
-            }   
-        }
-        // dd($quest->comments);
-        $user = User::find($quest->user_id);
-
-        return view('quest.show', compact('quest','user'));
+       
+        
+        return view('quest.show', compact('quest'));
     }
 
     /**

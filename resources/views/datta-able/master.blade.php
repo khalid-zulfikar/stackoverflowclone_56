@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{asset('/datta-able/plugins/animation/css/animate.min.css')}}">
     <!-- vendor css -->
     <link rel="stylesheet" href="{{asset('/datta-able/css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @stack('links')
 </head>
 

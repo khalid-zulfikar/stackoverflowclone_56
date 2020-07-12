@@ -44,19 +44,18 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action=" {{url("/quest/{$quest->id}")}} " method="post">
+                            <form action=" {{url('/quest/'.$quest->id)}} " method="post">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
-                                <label for="judul">Judul</label>
-                                <input type="text" class="form-control" id="judul" name="title" placeholder="Judul Pertanyaan" value="{{$quest->title}}">
+                                    <label for="judul">Judul</label>
+                                    <input type="text" class="form-control" id="judul" name="title" placeholder="Judul Pertanyaan" value="{{$quest->title}}">
                                 </div>
                                 <div class="form-group">
-                                <label for="pertanyaan">Pertanyaan</label>
-                                <input type="text" class="form-control" id="pertanyaan" name="content" placeholder="Isi Pertanyaan" value="{{$quest->content}}">
+                                    <label for="pertanyaan">Pertanyaan</label>
+                                    <input type="text" class="form-control" id="pertanyaan" name="content" placeholder="Isi Pertanyaan" value="{{$quest->content}}">
                                 </div>
-                               
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
@@ -75,7 +74,6 @@
 <!-- [ Main Content ] end -->
 
 @endsection
-
 @push('scripts')
 
 @endpush

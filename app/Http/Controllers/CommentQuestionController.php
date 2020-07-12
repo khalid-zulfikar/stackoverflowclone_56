@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\CommentQuestion as Coment;
+use App\CommentQuestion as Comment;
 use Illuminate\Http\Request;
 use Auth;
+use App\Quest;
 
 class CommentQuestionController extends Controller
 {
@@ -34,15 +35,32 @@ class CommentQuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $data=$request->all();
-        $new_comment = Coment::create([
-            'user_id' =>Auth::user()->id,
-            'quest_id' => $id,
-            'content_comment' => $data["content"]
-        ]);
-        return redirect('/pertanyaan/'.$id);
+        
+        $comment = new Comment;
+        $comment->content_comment = $request->get('content');
+        $comment->user()->associate($request->user());
+        $post = Quest::find($request->get('quest_id'));
+        $post->comments()->save($comment);
+        // return redirect('/pertanyaan/'.$id);
+        return back();
+    }
+   
+    public function replyStore(Request $request)
+    {
+        // dd($request->all());
+        $reply = new Comment();
+        $reply->content_comment = $request->get('content');
+        $reply->user()->associate($request->user());
+        $reply->parent_id = $request->get('comment_id');
+        $post = Quest::find($request->get('quest_id'));
+
+        $post->comments()->save($reply);
+
+        return back();
+
     }
 
     /**
@@ -85,8 +103,14 @@ class CommentQuestionController extends Controller
      * @param  \App\CommentQuestion  $commentQuestion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CommentQuestion $commentQuestion)
+    public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment_parent = Comment::where('parent_id',$id)->delete();
+        
+        // dd($comment_parent);
+        $comment->delete();
+
+        return back();
     }
 }

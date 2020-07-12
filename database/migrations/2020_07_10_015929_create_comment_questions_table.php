@@ -17,7 +17,10 @@ class CreateCommentQuestionsTable extends Migration
             $table->id();
             $table->longtext('content_comment')->nullable();
             $table->unsignedBigInteger('user_id')->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('quest_id')->foreign('quest_id')->references('id')->on('quests');
+            $table->integer('parent_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('quest_id')->foreign('quest_id')->references('id')->on('quests')->nullable();
+            $table->integer('commentable_id')->unsigned();
+            $table->string('commentable_type');
             $table->timestamps();
         });
     }

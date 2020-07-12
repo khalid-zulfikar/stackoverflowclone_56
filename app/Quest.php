@@ -10,9 +10,9 @@ class Quest extends Model
     protected $guarded = [];
     public function comments()
     {
-        return $this->hasMany('App\CommentQuestion');
+        return $this->morphMany(CommentQuestion::class, 'commentable')->whereNull('parent_id');
     }
-    public function users(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
     

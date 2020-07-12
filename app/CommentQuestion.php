@@ -9,11 +9,12 @@ class CommentQuestion extends Model
     //
     protected $guarded = [];
 
-    public function commentquest()
+    public function replies()
     {
-        return $this->belongsTo('App\Quest');
+        return $this->hasMany(CommentQuestion::class, 'parent_id');
+
     }
-    public function commentuser(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 

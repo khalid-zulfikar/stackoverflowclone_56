@@ -13,66 +13,59 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<style>
+    .display-comment .display-comment {
+        margin-left: 40px
+    }
+</style>
 
 @endpush
 
 @section('content')
 
-<div class="card">
-      
-    <div class="card-header">
-        <h3 class="card-title">{{$quest->title}}</h3>    
-        <br>
-    </div>
-      <!-- /.card-header -->
-    <div class="card-body" style="font-size : 17px">      
-        {!!$quest->content!!} 
-        <br>&nbsp;   
-    </div>
-      <!-- /.card-body -->
-</div>
-<!-- Comment start -->
-@foreach($quest->comments as $komen )
-<div class="container mt-2">	
-	<div class="card">
-	  <div class="card-body">
-      <div class="row">
-        	   
-        <div class="col-md-12">
-          <p>
-            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>
-              nama</strong></a>
-              
-      	    <div class="clearfix"></div>
-            <p>{!! $komen->content_comment !!}</p>
-      	    <p>
-              <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
-              <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-    	      </p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <p><b>{{ $quest->title }}</b></p>
+                    <p>
+                        {!! $quest->content !!}
+                    </p>
+                    <hr />
+                    <h4>Display Comments</h4>
+                    
+                    @include('partials._comment_replies', ['comments' => $quest->comments, 'quest_id' => $quest->id])
+                    
+                    <hr />
+                    <h4>Add comment</h4>
+                    <form method="post" action="{{ route('comment.add') }}">
+                        @csrf
+                        <div class="form-group">
+                        <textarea name="content" class="form-control my-editor">{!! old('content', $content ?? '') !!}</textarea>
+                            <input type="hidden" name="quest_id" value="{{ $quest->id }}" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-warning" value="Add Comment" />
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-	    </div>
-          <!-- Nested Comment start -->
-	    
-          <!-- Nested Comment end -->
     </div>
-	</div>
 </div>
-@endforeach
-<!-- Comment end -->
-<div class="card mt-2">
-    <div class="card-body">
-        <form action="/comment/{{$quest->id}}" method="post">
-        @csrf
-          <div class="form-group">
-            <textarea name="content" class="form-control my-editor">{!! old('content', $content ?? '') !!}</textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
-</div>   
+
+
 @endsection
 
 @push('scripts')
+<script>
+$(document).on("click", ".open-AddBookDialog", function () {
+     var myBookId = $(this).data('id');
+     $(".modal-body #bookId").val( myBookId );
+     
+});
+</script>
 <script>
   var editor_config = {
     path_absolute : "/",

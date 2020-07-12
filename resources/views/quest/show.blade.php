@@ -12,7 +12,11 @@
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-
+    <style>
+    .display-comment .display-comment {
+        margin-left: 40px
+    }
+    </style>
 @endpush
 
 
@@ -50,53 +54,38 @@
                             
                             <h3 class="card-title">{{$quest->title}}</h3>
                             <br>
-                            Author : {{$user->name}}
+                            Author : {{$quest->user->name }}
                             | Create : {{$quest->created_at}}
                             <hr>
                             {{$quest->content}}
                             
                             </div>
+                        </div>
                            
                             <!-- /.card-header -->
                             <!-- Comment start -->
-                            @foreach($quest->comments as $komen )
-                            <div class="row justify-content-md-center ">	
-                                <div class="card col-md-11 mt-2" style="height: auto;" >
-                                    <div class="card-body">
-                                        <div class="row">
-                                                
-                                            <div class="col-md-12">
-                                            <p>
-                                                <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>
-                                                {!! $komen->user_name !!}</strong></a>
-                                                
-                                                <div class="clearfix"></div>
-                                                <p>{!! $komen->content_comment !!}</p>
-                                                <hr>
-                                                <a class="float-right btn btn-outline-primary "> <i class="fa fa-reply"></i> Reply</a>
-                                                <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-                                            </div>
-                                        </div>
-                                            <!-- Nested Comment start -->
-                                            
-                                            <!-- Nested Comment end -->
-                                    </div>
-                                </div>
+                        <div class="row justify-content-md-center ">
+                            <div class="card col-md-11" style="height: auto;" >
+                            @include('partials._comment_replies', ['comments' => $quest->comments, 'quest_id' => $quest->id])
                             </div>
-                            @endforeach
-                            <!-- Comment end -->
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <form action="/comment/{{$quest->id}}" method="post">
-                                    @csrf
-                                    <div class="form-group">
-                                        <textarea name="content" class="form-control my-editor">{!! old('content', $content ?? '') !!}</textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
-                                </div>
-                            </div> 
                         </div>
+
+                            
+                            <!-- Comment end -->
+                        <div class="card ">
+                            <div class="card-body">
+                                <form action="{{ route('comment.add') }}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <textarea name="content" class="form-control my-editor">{!! old('content', $content ?? '') !!}</textarea>
+                            <input type="hidden" name="quest_id" value="{{ $quest->id }}" />
+
+                                </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div> 
+                        
                         <!-- /.card -->
                         <!-- [ Main Content ] end -->
                     </div>
@@ -110,6 +99,13 @@
 @endsection
 
 @push('scripts')
+<script>
+$(document).on("click", ".open-AddBookDialog", function () {
+     var myBookId = $(this).data('id');
+     $(".modal-body #bookId").val( myBookId );
+     
+});
+</script>
 <script>
   var editor_config = {
     path_absolute : "/",
